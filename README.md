@@ -2,6 +2,9 @@ stockery
 ======
 Get stock quotes.
 
+Install
+=======
+`gem install stockery`
 
 CLI Usage
 ========
