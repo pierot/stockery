@@ -47,7 +47,11 @@ module Stockery
     private
 
       def parse!
-        parser.parse! @argv
+        begin
+          parser.parse! @argv
+        rescue OptionParser::InvalidOption => io
+          abort "Invalid option."
+        end
       end
 
       def parser
@@ -57,13 +61,14 @@ module Stockery
           opts.separator ""
           opts.separator "Command options:"
 
-          opts.on("-s", "--source HOST", "Stock source (default: #{@options[:source]})")  { |source| @options[:source] = source }
-          opts.on("-q", "--quotes 'Comma separated'", "Required, no default")             { |quotes| @options[:quotes] = quotes }
-          opts.on("-o", "--output 'Output. JSON is default'", "Pass 'print' to print out, 'json' for JSON (default).")  { |output| @options[:output] = output }
+          opts.on("-s", "--source 'Google'", "Stock source (default: #{@options[:source]})"){ |source| @options[:source] = source }
+          opts.on("-q", "--quotes 'Comma separated'", "Required, no default")               { |quotes| @options[:quotes] = quotes }
+          opts.on("-o", "--output 'print'", "Possible values: 'print' and 'json'")          { |output| @options[:output] = output }
 
           opts.separator ""
 
           opts.on_tail("-h", "--help", "Show this message")                               { puts opts; exit }
+          # opts.on_tail("-v", "--version", "Print version")                                { puts opts; exit }
         end
       end
   end
