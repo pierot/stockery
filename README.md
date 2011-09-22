@@ -1,4 +1,4 @@
-stocky
+stockery
 ======
 Get stock quotes.
 
@@ -6,7 +6,7 @@ Get stock quotes.
 CLI Usage
 ========
 
-    Usage: stocky [options]
+    Usage: stockery [options]
 
     Command options:
       -s, --source HOST                Stock source (default: GOOGLE)
@@ -16,14 +16,14 @@ CLI Usage
 
 Example
 -------
-`stocky -q "GOOG, APL, MSFT"`
+`stockery -q "GOOG, APL, MSFT"`
 
 or
 
-`stocky -s "GOOGLE" -q "GOOG, APL"`
+`stockery -s "GOOGLE" -q "GOOG, APL"`
 
 
-Contributing to Stocky
+Contributing to Stockery
 ======================
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it

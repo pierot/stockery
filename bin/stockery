@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+# Stockery command line interface script.
+# Run <tt>stockery -h</tt> to get more usage.
+
+$LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
+
+require 'stockery'
+
+Stockery::Runner.new(ARGV).run!
