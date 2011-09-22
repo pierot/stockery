@@ -1,3 +1,5 @@
+require 'optparse'
+
 module Stocky
   class Runner
     def initialize(argv)
@@ -18,7 +20,6 @@ module Stocky
       end
 
       puts "Quotes at #{Time.now}\n"
-      puts "-----------------------------------"
       puts ""
 
       s_q = Stocky::Quote.new
