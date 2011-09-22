@@ -16,26 +16,24 @@ module Stockery
           abort "No valid source specified. The following source are available: \"GOOGLE\""
         end
       
-      result[:time_stamp] = Time.now.getutc
+      result[:timestamp] = Time.now.getutc
         
       result
     end
 
-    def print(stockery_data, do_print = false)
-      res = stockery_data
+    def print(stockery_data)
       printed = ""
 
-      unless res.empty?
-        printed += "#{res[:name]} on #{res[:market]} @ #{res[:timestamp]}\n"
-        printed += " *** MARKET CLOSED ***\n" if Time.now.strftime("%H:%M") > "16:00"
+      unless stockery_data.empty?
+        printed += "#{stockery_data[:name]} on #{stockery_data[:market]} @ #{stockery_data[:timestamp]}\n"
+        # printed += " *** MARKET CLOSED ***\n" if Time.now.strftime("%H:%M") > "16:00"
         
-        printed_pr = "#{res[:price]} #{res[:change_points]} (#{res[:change_procent]}%)"
-        printed += res[:change_points].to_f < 0 ? printed_pr.red : printed_pr.green
+        printed_pr = "#{stockery_data[:price]} #{stockery_data[:change_points]} (#{stockery_data[:change_procent]}%)"
+        printed += stockery_data[:change_points].to_f < 0 ? printed_pr.red : printed_pr.green
       else
         printed += "Stock data invalid or empty"
       end
 
-      puts printed if do_print
       printed
     end
 
@@ -76,7 +74,7 @@ module Stockery
           data_stock[:price] = data[2]
           # data_stock[:price_currency] = data[0]
           data_stock[:change_points] = data[3]
-          data_stock[:change_procent] = data[4]
+          data_stock[:change_procent] = data[4].gsub!("%", "")
 
           # data_stock[:timestamp] = data[0]
         end
