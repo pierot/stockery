@@ -4,15 +4,15 @@ Get stock quotes.
 
 == CLI Usage
 
-Usage: stocky [options]
+  Usage: stocky [options]
 
-Command options:
+  Command options:
     -s, --source HOST                Stock source (default: GOOGLE)
     -q, --quotes 'comma separated'   Required, no default
 
     -h, --help 
 
-== Contributing to stocky
+== Contributing to Stocky
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
@@ -24,6 +24,5 @@ Command options:
 
 == Copyright
 
-Copyright (c) 2011 Pieter Michels. See LICENSE.txt for
-further details.
+Copyright (c) 2011 Pieter Michels. See LICENSE.txt for further details.
 
