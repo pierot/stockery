@@ -19,7 +19,7 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = "http://github.com/pierot/stocky"
   gem.license = "MIT"
   gem.summary = %Q{Fetch stock quotes}
-  gem.description = %Q{Fetch stock quotes}
+  gem.description = %Q{Fetch stock quotes. Build as a gem and command line tool.}
   gem.email = "pieter@noort.be"
   gem.authors = ["Pieter Michels"]
   # dependencies defined in Gemfile

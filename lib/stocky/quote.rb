@@ -3,16 +3,16 @@ module Stocky
     attr_accessor :source
 
     def initialize
-      source = Stocky::GOOGLE
+      self.source = Stocky::GOOGLE
     end
 
     def get_status(symbol)
       result = case source
-      when Stocky::GOOGLE then
-        fetch_goog(symbol)
-      else
-        "--"
-      end
+        when Stocky::GOOGLE then
+          fetch_goog(symbol)
+        else
+          abort "No valid source specified. The following source are available: \"GOOGLE\""
+        end
 
       result
     end
