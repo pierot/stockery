@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+# Stocky command line interface script.
+# Run <tt>stocky -h</tt> to get more usage.
+
+require 'stocky'
+
+Stocky::Runner.new(ARGV).run!
