@@ -12,6 +12,14 @@ Get stock quotes.
 
     -h, --help 
 
+= Example
+
+  stocky -q "GOOG, APL, MSFT"
+
+or
+
+  stocky -s "GOOGLE" -q "GOOG, APL"
+
 == Contributing to Stocky
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
