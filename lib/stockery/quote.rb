@@ -10,10 +10,14 @@ module Stockery
       result = case source
         when Stockery::GOOGLE then
           fetch_goog(symbol)
+        when Stockery::YAHOO then
+          fetch_yahoo(symbol)
         else
           abort "No valid source specified. The following source are available: \"GOOGLE\""
         end
-
+      
+      result[:time_stamp] = Time.now.getutc
+        
       result
     end
 
@@ -48,13 +52,35 @@ module Stockery
           data_stock[:market] = data['e']
           data_stock[:name] = data['t']
           data_stock[:price] = data['l']
-          data_stock[:price_currency] = data['l_curr']
+          # data_stock[:price_currency] = data['l_curr']
           data_stock[:change_points] = data['c']
           data_stock[:change_procent] = data['cp']
 
-          data_stock[:timestamp] = data['ltt']
+          # data_stock[:timestamp] = data['ltt']
         end
 
+        data_stock
+      end
+
+      def fetch_yahoo(symbol)
+        resp = Net::HTTP.get_response(URI.parse("http://download.finance.yahoo.com/d/quotes.csv?s=#{symbol}&f=snl1c1p2x&e=.csv"))
+        lines = resp.body.split("\r\n")
+
+        data_stock = {}
+
+        lines.each do |line|
+          data = JSON.parse("[#{line}]")
+
+          data_stock[:market] = data[5]
+          data_stock[:name] = data[0]
+          data_stock[:price] = data[2]
+          # data_stock[:price_currency] = data[0]
+          data_stock[:change_points] = data[3]
+          data_stock[:change_procent] = data[4]
+
+          # data_stock[:timestamp] = data[0]
+        end
+        
         data_stock
       end
   end

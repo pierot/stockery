@@ -9,6 +9,7 @@ module Stockery
       @options = {
         :source          => Stockery::GOOGLE,
         :quotes          => '',
+        :output          => 'json',
       }
 
       parse!
@@ -19,19 +20,27 @@ module Stockery
         abort "Quote symbols missing. Usage `stockery -q \"GOOG, MSFT\""
       end
 
-      puts "Quotes at #{Time.now}\n"
-      puts ""
-
       s_q = Stockery::Quote.new
       s_q.source = @options[:source]
     
       quotes = @options[:quotes].split(',').collect { |q| q.to_s.strip }
-
+      quotes_res = []
+      
       quotes.each do |quote|
-        res = s_q.get_status(quote)
-        puts s_q.print(res)
+        quotes_res << s_q.get_status(quote)
+      end
 
-        puts "\n"
+      case @options[:output]
+      when 'print'
+        puts "Quotes at #{Time.now}\n"
+        puts ""
+
+        quotes_res.each do |quote|
+          puts s_q.print(quote)
+          puts "\n"
+        end
+      when 'json'
+        p JSON.generate(quotes_res)
       end
     end 
 
@@ -49,7 +58,8 @@ module Stockery
           opts.separator "Command options:"
 
           opts.on("-s", "--source HOST", "Stock source (default: #{@options[:source]})")  { |source| @options[:source] = source }
-          opts.on("-q", "--quotes 'comma separated'", "Required, no default")             { |quotes| @options[:quotes] = quotes }
+          opts.on("-q", "--quotes 'Comma separated'", "Required, no default")             { |quotes| @options[:quotes] = quotes }
+          opts.on("-o", "--output 'Output. JSON is default'", "Pass 'print' to print out, 'json' for JSON (default).")  { |output| @options[:output] = output }
 
           opts.separator ""
 

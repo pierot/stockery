@@ -1,5 +1,7 @@
 require 'open-uri'
 require 'json'
+require 'net/http'
+require 'time'
 
 module Stockery
   GOOGLE = "GOOGLE"
