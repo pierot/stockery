@@ -6,12 +6,12 @@ Get stock quotes.
 CLI Usage
 ========
   Usage: stocky [options]
-  
+
   Command options:
-  -s, --source HOST                Stock source (default: GOOGLE)
-  -q, --quotes 'comma separated'   Required, no default
-  
-  -h, --help 
+    -s, --source HOST                Stock source (default: GOOGLE)
+    -q, --quotes 'comma separated'   Required, no default
+
+    -h, --help 
 
 Example
 -------
