@@ -16,6 +16,7 @@ CLI Usage
       -q, --quotes 'comma separated'   Required, no default
       
       -h, --help 
+      -v, --version
 
 Example
 -------
