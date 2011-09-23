@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "stockery"
-  s.version = "0.3.2"
+  s.version = "0.4.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Pieter Michels"]
-  s.date = "2011-09-22"
+  s.date = "2011-09-23"
   s.description = "Fetch stock quotes. Build as a gem and command line tool."
   s.email = "pieter@noort.be"
   s.executables = ["stockery"]
@@ -27,12 +27,11 @@ Gem::Specification.new do |s|
     "lib/stockery.rb",
     "lib/stockery/quote.rb",
     "lib/stockery/runner.rb",
-    "lib/stockery/version.rb",
     "stockery.gemspec",
     "test/helper.rb",
     "test/test_stockery.rb"
   ]
-  s.homepage = "http://github.com/pierot/stockery"
+  s.homepage = "http://wellconsidered.be/post/10526511041/stockery-stock-quotes-rubygem"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.10"

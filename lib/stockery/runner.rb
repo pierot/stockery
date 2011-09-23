@@ -17,7 +17,7 @@ module Stockery
 
     def run!
       if @options[:quotes].length == 0
-        abort "Quote symbols missing. Usage `stockery -q \"GOOG, MSFT\""
+        abort "Stock symbols missing. Usage `stockery -q \"GOOG, MSFT\""
       end
 
       s_q = Stockery::Quote.new
@@ -61,14 +61,14 @@ module Stockery
           opts.separator ""
           opts.separator "Command options:"
 
+          opts.on("-q", "--query 'Comma separated symbols'", "Required")                    { |quotes| @options[:quotes] = quotes }
           opts.on("-s", "--source 'Google'", "Stock source (default: #{@options[:source]})"){ |source| @options[:source] = source }
-          opts.on("-q", "--quotes 'Comma separated'", "Required, no default")               { |quotes| @options[:quotes] = quotes }
           opts.on("-o", "--output 'print'", "Possible values: 'print' and 'json'")          { |output| @options[:output] = output }
 
           opts.separator ""
 
-          opts.on_tail("-h", "--help", "Show this message")                               { puts opts; exit }
-          # opts.on_tail("-v", "--version", "Print version")                                { puts opts; exit }
+          opts.on_tail("-h", "--help", "Show this message")                                 { puts opts; exit }
+          opts.on_tail("-v", "--version", "Print version")                                  { puts Stockery::VERSION; exit }
         end
       end
   end

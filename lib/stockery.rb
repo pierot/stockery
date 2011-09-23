@@ -8,6 +8,8 @@ module Stockery
   YAHOO = "YAHOO"
 
   ROOT = File.expand_path(File.dirname(__FILE__))
+
+  VERSION = ::File.read(::File.join(::File.dirname(__FILE__), "..", "VERSION")).strip
   
   autoload :Runner,             "#{ROOT}/stockery/runner" 
   autoload :Quote,              "#{ROOT}/stockery/quote" 

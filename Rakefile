@@ -18,7 +18,7 @@ end
 
 Jeweler::Tasks.new do |gem|
   gem.name = "stockery"
-  gem.homepage = "http://github.com/pierot/stockery"
+  gem.homepage = "http://wellconsidered.be/post/10526511041/stockery-stock-quotes-rubygem"
   gem.license = "MIT"
   gem.summary = %Q{Fetch stock quotes}
   gem.description = %Q{Fetch stock quotes. Build as a gem and command line tool.}

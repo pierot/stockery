@@ -3,17 +3,17 @@ module Stockery
     attr_accessor :source
 
     def initialize
-      self.source = Stockery::GOOGLE
+      self.source = Stockery::GOOGLE # default
     end
 
     def get_status(symbol)
-      result = case source
+      result = case source.upcase
         when Stockery::GOOGLE then
           fetch_goog(symbol)
         when Stockery::YAHOO then
           fetch_yahoo(symbol)
         else
-          abort "No valid source specified. The following source are available: \"GOOGLE\""
+          abort "No valid source specified. The following source are available: \"GOOGLE\", \"YAHOO\""
         end
       
       result[:timestamp] = Time.now.getutc
