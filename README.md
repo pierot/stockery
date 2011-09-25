@@ -14,6 +14,7 @@ CLI Usage
     Command options:
       -s, --source HOST                Stock source (default: GOOGLE)
       -q, --quotes 'comma separated'   Required, no default
+      -o, --output 'print|json'        Either 'json' (default) or 'print'
       
       -h, --help 
       -v, --version
