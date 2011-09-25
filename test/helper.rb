@@ -16,3 +16,18 @@ require 'stockery'
 
 class Test::Unit::TestCase
 end
+
+require 'stringio'
+
+def capture
+    begin
+      $stdout = StringIO.new
+      yield
+      $stdout.flush
+      result = $stdout.string
+    ensure
+      $stdout = STDOUT
+    end
+
+    result
+end

@@ -2,6 +2,8 @@ require 'optparse'
 
 module Stockery
   class Runner
+    attr_accessor :options
+
     def initialize(argv)
       @argv = argv
       
@@ -40,7 +42,7 @@ module Stockery
           puts "\n"
         end
       when 'json'
-        p JSON.generate(quotes_res)
+        puts JSON.generate(quotes_res)
       end
     end 
 
