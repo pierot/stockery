@@ -24,7 +24,7 @@ module Stockery
     def print(stockery_data)
       printed = ""
 
-      unless stockery_data.empty?
+      unless stockery_data.nil? || stockery_data.empty?
         printed += "#{stockery_data[:name]} on #{stockery_data[:market]} @ #{stockery_data[:timestamp]}\n"
         # printed += " *** MARKET CLOSED ***\n" if Time.now.strftime("%H:%M") > "16:00"
         
