@@ -15,33 +15,68 @@ class TestStockeryRunner < Test::Unit::TestCase
       assert_equal runner.options[:output], "print"
     end
 
-    # should "print the result as a json string by default" do
-    #   out = silence_stream(STDOUT) do
-    #     runner = Stockery::Runner.new(%w(-q AAPL))
-    #     runner.run!
-    #   end
+    should "exit when passing invalid option" do
+      out = capture_error do
+        begin
+          Stockery::Runner.new(%w(--bad-option))
+        rescue SystemExit => e
+        end
+      end
+      
+      assert_equal "Invalid option.\n", out.to_s
+    end
 
-    #   puts out.to_s
-    #   json = JSON.parse(out.to_s)
-    #   # assert_match out.to_s, "/Quotes at/"
-    # end
+    should "exit when passing no symbols" do
+      out = capture_error do
+        begin
+          runner = Stockery::Runner.new(%w(-o print))
+          runner.run!
+        rescue SystemExit => e
+        end
+      end
+      
+      assert_equal "Stock symbols missing. Usage `stockery -q \"GOOG, MSFT\"\n", out.to_s
+    end
 
-    # should "print the result when passing print output argument" do
-    #   out = silence_stream(STDOUT) do
-    #     runner = Stockery::Runner.new(%w(-q AAPL -o print))
-    #     runner.run!
-    #   end
+    should "print the result as a json string by default" do
+      out = capture_output do
+        runner = Stockery::Runner.new(%w(-q AAPL))
+        runner.run!
+      end
 
-    #   assert_match out.to_s, "/Quotes at/"
-    # end
+      possible_json_data = out.to_s
 
-    # should "print its version" do
-    #   out = silence_stream(STDOUT) do
-    #     runner = Stockery::Runner.new(%w(-v))
-    #     runner.run!
-    #   end
+      begin
+        JSON.parse(possible_json_data)
 
-    #   assert_equal out.to_s, Stockery::VERSION
-    # end
+        valid = true
+      rescue JSON::ParserError => e
+        valid = false 
+      end
+
+      assert valid
+    end
+
+    should "print the result when passing print output argument" do
+      out = capture_output do
+        runner = Stockery::Runner.new(%w(-q AAPL -o print))
+        runner.run!
+      end
+
+      assert_match "Quotes at", out.to_s
+    end
+
+    should "print its version" do
+      out = capture_output do
+        begin
+          runner = Stockery::Runner.new(%w(-v))
+          runner.run!
+        rescue SystemExit => e
+
+        end
+      end
+
+      assert_equal Stockery::VERSION + "\n", out.to_s # \n because of exit status
+    end
   end
 end

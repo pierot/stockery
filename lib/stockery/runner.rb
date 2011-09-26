@@ -69,8 +69,8 @@ module Stockery
 
           opts.separator ""
 
-          opts.on_tail("-h", "--help", "Show this message")                                 { puts opts; exit }
-          opts.on_tail("-v", "--version", "Print version")                                  { puts Stockery::VERSION; exit }
+          opts.on_tail("-h", "--help", "Show this message")                                 { puts opts; exit 0 }
+          opts.on_tail("-v", "--version", "Print version")                                  { puts Stockery::VERSION; exit 0 }
         end
       end
   end

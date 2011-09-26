@@ -17,12 +17,36 @@ require 'stockery'
 class Test::Unit::TestCase
 end
 
-def silence_stream(stream)                                                                                                                                   
-  old_stream = stream.dup
-  stream.reopen(RUBY_PLATFORM =~ /mswin/ ? 'NUL:' : '/dev/null')
-  stream.sync = true                                                                                                                                         
+require 'stringio'
 
-  yield                                                                                                                                                    
-ensure                                                                                                                                                       
-  stream.reopen(old_stream)                                                                                                                                  
+def capture_output(&block)
+  original_stdout = $stdout
+
+  $stdout = fake = StringIO.new
+  $stdout.flush
+
+  begin
+    yield
+  ensure
+    $stdout = original_stdout
+    $stdout.flush
+  end
+
+  fake.string
+end
+
+def capture_error(&block)
+  original_stdout = $stderr
+
+  $stderr = fake = StringIO.new
+  $stderr.flush
+
+  begin
+    yield
+  ensure
+    $stderr = original_stdout
+    $stderr.flush
+  end
+
+  fake.string
 end
