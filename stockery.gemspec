@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "stockery"
-  s.version = "0.4.1"
+  s.version = "0.4.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Pieter Michels"]
-  s.date = "2011-09-25"
+  s.date = "2011-09-26"
   s.description = "Fetch stock quotes. Build as a gem and command line tool."
   s.email = "pieter@noort.be"
   s.executables = ["stockery"]
