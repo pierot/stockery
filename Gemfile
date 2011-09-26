@@ -4,6 +4,12 @@ gem 'json'
 
 group :test do
   gem "rake"
+
+  gem 'ansi'
+  gem 'turn'
+end
+
+group :development, :test do
 end
 
 group :development do

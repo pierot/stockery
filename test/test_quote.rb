@@ -20,6 +20,11 @@ class TestStockeryQuote < Test::Unit::TestCase
       assert_not_nil result 
     end
 
+    should "return nil when requesting a invalid symbol" do
+      result = @stock.get_status("INVALID")
+      assert_nil result
+    end
+
     should "print out an 'error message' when sending an invalid stock data object" do
       message = @stock.print(nil)
       assert_equal message, "Stock data invalid or empty"

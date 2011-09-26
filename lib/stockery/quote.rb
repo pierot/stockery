@@ -15,10 +15,14 @@ module Stockery
         else
           abort "No valid source specified. The following source are available: \"GOOGLE\", \"YAHOO\""
         end
-      
-      result[:timestamp] = Time.now.getutc
-        
-      result
+     
+      unless result.empty?
+        result[:timestamp] = Time.now.getutc
+          
+        result
+      else
+        nil
+      end
     end
 
     def print(stockery_data)
@@ -40,10 +44,14 @@ module Stockery
     private
 
       def fetch_goog(symbol)
-        json = open("http://www.google.com/finance/info?client=ig&q=#{symbol}").read
-        json = json.sub(/^\n\/\//, '')
+        begin
+          json = open("http://www.google.com/finance/info?client=ig&q=#{symbol}").read
+          json = json.sub(/^\n\/\//, '')
 
-        data = JSON.parse(json)[0]
+          data = JSON.parse(json)[0]
+        rescue OpenURI::HTTPError => e
+        end
+
         data_stock = {}
         
         unless data.nil?
